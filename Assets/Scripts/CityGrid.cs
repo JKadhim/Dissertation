@@ -14,9 +14,10 @@ public class CityGrid : MonoBehaviour
         CitySpawn();
     }
 
+    //Spaces out individual city blocks into a grid formation
     private void CitySpawn()
     {
-        GameObject CityContainer = new GameObject("CityContainer");
+        GameObject cityContainer = new GameObject("CityContainer");
         float offset = citySize / 2;
         int blockSize = cityBlock.blockSize;
 
@@ -26,9 +27,9 @@ public class CityGrid : MonoBehaviour
             {
                 GameObject block =  cityBlock.BlockSpawn(x,y);
                 
-                //convert following
-                //roadTile.transform.position = new Vector3(x - offset - (cellSize / 2), 0, y - offset - (cellSize / 2));
-                //roadTile.transform.SetParent(blockContainer.transform);
+                //sets the blocks an appropriate distance apart
+                block.transform.position = new Vector3((x*blockSize) - offset - (blockSize / 2), 0, (y*blockSize) - offset - (blockSize / 2));
+                block.transform.SetParent(cityContainer.transform);
 
             }
         }

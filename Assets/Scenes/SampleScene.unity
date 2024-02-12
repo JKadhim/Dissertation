@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockSize: 10
   cellSize: 1
+  height: 4
   buildingPrefab: {fileID: 6333327747194575726, guid: e6473e8b308efe342bfbea1902f883e8, type: 3}
   roadPrefab: {fileID: 6333327747194575726, guid: 3d9d27528b932494da39832b530c4f1e, type: 3}
   buildingMaterial: {fileID: 2100000, guid: c5a898f118394ad4599cbd7bf2a05a29, type: 2}
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   citySize: 10
-  cityBlock: {fileID: 0}
+  cityBlock: {fileID: 264255254}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
