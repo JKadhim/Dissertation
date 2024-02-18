@@ -21,9 +21,9 @@ public class CityGrid : MonoBehaviour
         float offset = citySize / 2;
         int blockSize = cityBlock.blockSize;
 
-        for (int y = 0; y <= citySize; y++)
+        for (int y = 0; y < citySize; y++)
         {
-            for (int x = 0; x <= citySize; x++)
+            for (int x = 0; x < citySize; x++)
             {
                 GameObject block =  cityBlock.BlockSpawn(x,y);
                 
