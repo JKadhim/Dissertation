@@ -15,7 +15,7 @@ public class CityBlock : MonoBehaviour
     public GameObject BlockSpawn(int A, int B)
     {
         GameObject blockContainer = new GameObject("Block_" + A + "," + B);
-        float offset = blockSize / 2;
+        float offset = (blockSize / 2) * cellSize;
 
         for (int y = 1; y <= blockSize; y++)
         {
@@ -26,7 +26,8 @@ public class CityBlock : MonoBehaviour
                 {
                     GameObject roadTile = Instantiate(roadPrefab);
                     roadTile.name = "roadTile_" + x + "," + y;
-                    roadTile.transform.position = new Vector3(x - offset - (cellSize / 2), 0, y - offset - (cellSize / 2));
+                    roadTile.transform.localScale = new Vector3(cellSize, roadTile.GetComponent<Transform>().localScale.y, cellSize);
+                    roadTile.transform.position = new Vector3(x*cellSize, 0, y*cellSize);
                     roadTile.transform.SetParent(blockContainer.transform);
                 }
                 //ensures each block contains a ring of 'buildings'
@@ -34,7 +35,7 @@ public class CityBlock : MonoBehaviour
                 {
                     GameObject buildingTile = Instantiate(buildingPrefab);
                     buildingTile.name = "BuildingTile_" + x + "," + y;
-                    buildingTile.transform.localScale = new Vector3(buildingTile.GetComponent<Transform>().localScale.x, height, buildingTile.GetComponent<Transform>().localScale.z);
+                    buildingTile.transform.localScale = new Vector3(cellSize, height, cellSize);
                     buildingTile.transform.position = new Vector3(x - offset - (cellSize / 2), buildingTile.GetComponent<Transform>().localScale.y / 2, y - offset - (cellSize / 2));
                     buildingTile.transform.SetParent(blockContainer.transform);
                 }

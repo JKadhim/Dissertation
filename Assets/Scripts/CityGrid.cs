@@ -8,6 +8,7 @@ public class CityGrid : MonoBehaviour
 
     public int citySize;
     public CityBlock cityBlock;
+    public GameObject player;
 
     private void Start()
     {
@@ -28,10 +29,11 @@ public class CityGrid : MonoBehaviour
                 GameObject block =  cityBlock.BlockSpawn(x,y);
                 
                 //sets the blocks an appropriate distance apart
-                block.transform.position = new Vector3((x*blockSize) - offset - (blockSize / 2), 0, (y*blockSize) - offset - (blockSize / 2));
+                block.transform.position = new Vector3((x * blockSize * cityBlock.cellSize), 0, y * blockSize * cityBlock.cellSize);
                 block.transform.SetParent(cityContainer.transform);
 
             }
         }
+        cityContainer.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z);
     }
 }
