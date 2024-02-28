@@ -34,6 +34,9 @@ public class CityGrid : MonoBehaviour
 
             }
         }
-        cityContainer.transform.position = new Vector3(player.transform.position.x, 0, player.transform.position.z);
+        int cellSize = cityBlock.cellSize;
+        int scale = blockSize * citySize * cellSize;
+        Vector3 containerPosition = cityContainer.transform.position;
+        player.transform.position = new Vector3 ((containerPosition.x + cellSize + scale) / 2, 1, (containerPosition.z + cellSize + scale) /2);
     }
 }

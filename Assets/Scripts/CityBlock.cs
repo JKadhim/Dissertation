@@ -36,7 +36,7 @@ public class CityBlock : MonoBehaviour
                     GameObject buildingTile = Instantiate(buildingPrefab);
                     buildingTile.name = "BuildingTile_" + x + "," + y;
                     buildingTile.transform.localScale = new Vector3(cellSize, height, cellSize);
-                    buildingTile.transform.position = new Vector3(x - offset - (cellSize / 2), buildingTile.GetComponent<Transform>().localScale.y / 2, y - offset - (cellSize / 2));
+                    buildingTile.transform.position = new Vector3(x * cellSize, buildingTile.GetComponent<Transform>().localScale.y / 2, y * cellSize);
                     buildingTile.transform.SetParent(blockContainer.transform);
                 }
 
