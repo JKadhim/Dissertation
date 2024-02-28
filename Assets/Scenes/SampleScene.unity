@@ -225,7 +225,6 @@ GameObject:
   - component: {fileID: 913174756}
   - component: {fileID: 913174758}
   - component: {fileID: 913174757}
-  - component: {fileID: 913174759}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -260,7 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bd858a749631954ebc09f982c097834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  citySize: 10
+  citySize: 4
   cityBlock: {fileID: 913174758}
   player: {fileID: 1820243409}
 --- !u!114 &913174758
@@ -275,29 +274,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c456201de724ff84b8f2d69e40bcc429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockSize: 20
-  cellSize: 2
-  height: 10
+  blockSize: 10
+  cellSize: 1
+  height: 20
   buildingPrefab: {fileID: 6333327747194575726, guid: e6473e8b308efe342bfbea1902f883e8, type: 3}
   roadPrefab: {fileID: 6333327747194575726, guid: 3d9d27528b932494da39832b530c4f1e, type: 3}
   buildingMaterial: {fileID: 2100000, guid: c5a898f118394ad4599cbd7bf2a05a29, type: 2}
   roadMaterial: {fileID: 2100000, guid: c118ea550876cb54fb49fb6c3edbd619, type: 2}
---- !u!114 &913174759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 913174755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 275bb771e611d264f8abdd74d6efce89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stringSeed: fire
-  useStringSeed: 1
-  seed: 232323
-  randomizeSeed: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
