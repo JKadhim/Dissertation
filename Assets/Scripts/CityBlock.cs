@@ -5,43 +5,61 @@ using UnityEngine;
 public class CityBlock : MonoBehaviour
 {
 
-    public int blockSize, cellSize, height;
+    public Vector3Int blockSize = new Vector3Int(16, 100, 16);
 
     public GameObject buildingPrefab, roadPrefab;
     
     public Material buildingMaterial, roadMaterial;
 
     //creates a city block on a small grid of squares
+    private void Start()
+    {
+        GameObject block = BlockSpawn(0, 0);
+    }
+
     public GameObject BlockSpawn(int A, int B)
     {
         GameObject blockContainer = new GameObject("Block_" + A + "," + B);
-        float offset = (blockSize / 2) * cellSize;
-
-        for (int y = 1; y <= blockSize; y++)
+        
+        for (int x = 0; x < blockSize.x; x++)
         {
-            for (int x = 1; x <= blockSize; x++)
+            for (int z = 0; z < blockSize.z; z++)
             {
                 //ensures that each block is surrounded by roads
-                if (y == 1 || y == blockSize || x == 1 || x == blockSize)
+                if (x == 0 || x == 1 || x == 2 || x == 3 || x == blockSize.x - 1 || x == blockSize.x - 2 || x == blockSize.x - 3 || x == blockSize.x - 4)
                 {
                     GameObject roadTile = Instantiate(roadPrefab);
-                    roadTile.name = "roadTile_" + x + "," + y;
-                    roadTile.transform.localScale = new Vector3(cellSize, roadTile.GetComponent<Transform>().localScale.y, cellSize);
-                    roadTile.transform.position = new Vector3(x*cellSize, 0, y*cellSize);
+                    roadTile.name = "roadTile_" + x + "," + z;
+                    roadTile.transform.position = new Vector3(x, 0, z);
                     roadTile.transform.SetParent(blockContainer.transform);
                 }
-                //ensures each block contains a ring of 'buildings'
-                else if (y == 2 || y == blockSize - 1 || x == 2 || x == blockSize - 1)
+                else if (z == 0 || z == 1 || z == 2 || z == 3 || z == blockSize.z - 1 || z == blockSize.z - 2 || z == blockSize.z - 3 || z == blockSize.z - 4)
                 {
-                    GameObject buildingTile = Instantiate(buildingPrefab);
-                    buildingTile.name = "BuildingTile_" + x + "," + y;
-                    buildingTile.transform.localScale = new Vector3(cellSize, height, cellSize);
-                    buildingTile.transform.position = new Vector3(x * cellSize, buildingTile.GetComponent<Transform>().localScale.y / 2, y * cellSize);
-                    buildingTile.transform.SetParent(blockContainer.transform);
+                    GameObject roadTile = Instantiate(roadPrefab);
+                    roadTile.name = "roadTile_" + x + "," + z;
+                    roadTile.transform.position = new Vector3(x, 0, z);
+                    roadTile.transform.SetParent(blockContainer.transform);
                 }
+
+                
+                //else
+                //{
+                //    for (int y = 0; y< blockSize.y; y++)
+                //    {
+                //        GameObject buildingTile = Instantiate (buildingPrefab);
+                //        buildingTile.name = "buildingTile_" + x + "," + y + "," + z;
+                //        buildingTile.transform.position = new Vector3(x, y, z);
+                //        buildingTile.transform.SetParent (blockContainer.transform);
+                //    }
+                //}
 
             }
         }
+        Vector3Int buildingSize = new Vector3Int(blockSize.x - 8, blockSize.y, blockSize.z - 8);
+        GameObject buildingTile = Instantiate(buildingPrefab);
+        buildingTile.transform.localScale = buildingSize;
+        buildingTile.transform.SetParent(blockContainer.transform);
+        buildingTile.transform.localPosition = new Vector3((float)(blockSize.x - 1) / 2, (float)blockSize.y / 2, (float)(blockSize.z - 1) / 2);
         return blockContainer;
     }
 
