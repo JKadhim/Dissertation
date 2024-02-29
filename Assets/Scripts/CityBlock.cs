@@ -5,12 +5,14 @@ using UnityEngine;
 public class CityBlock : MonoBehaviour
 {
 
-    public Vector3Int blockSize = new Vector3Int(16, 100, 16);
+    public Vector3Int blockSize = new Vector3Int(32, 50, 32);
 
     public GameObject buildingPrefab, roadPrefab;
     
     public Material buildingMaterial, roadMaterial;
 
+    private int[,,] tempData;
+ 
     //creates a city block on a small grid of squares
     private void Start()
     {
@@ -20,6 +22,8 @@ public class CityBlock : MonoBehaviour
     public GameObject BlockSpawn(int A, int B)
     {
         GameObject blockContainer = new GameObject("Block_" + A + "," + B);
+
+        tempData = new int[blockSize.x, blockSize.y, blockSize.z];
         
         for (int x = 0; x < blockSize.x; x++)
         {
@@ -41,25 +45,32 @@ public class CityBlock : MonoBehaviour
                     roadTile.transform.SetParent(blockContainer.transform);
                 }
 
-                
-                //else
-                //{
-                //    for (int y = 0; y< blockSize.y; y++)
-                //    {
-                //        GameObject buildingTile = Instantiate (buildingPrefab);
-                //        buildingTile.name = "buildingTile_" + x + "," + y + "," + z;
-                //        buildingTile.transform.position = new Vector3(x, y, z);
-                //        buildingTile.transform.SetParent (blockContainer.transform);
-                //    }
-                //}
+
+                else
+                {
+                    for (int y = 0; y < blockSize.y; y++)
+                    {
+                        //GameObject buildingTile = Instantiate(buildingPrefab);
+                        //buildingTile.name = "buildingTile_" + x + "," + y + "," + z;
+                        //buildingTile.transform.position = new Vector3(x, y, z);
+                        //buildingTile.transform.SetParent(blockContainer.transform);
+
+                        tempData[x, y, z] = 1;
+                    }
+                }
 
             }
+
         }
-        Vector3Int buildingSize = new Vector3Int(blockSize.x - 8, blockSize.y, blockSize.z - 8);
-        GameObject buildingTile = Instantiate(buildingPrefab);
-        buildingTile.transform.localScale = buildingSize;
-        buildingTile.transform.SetParent(blockContainer.transform);
-        buildingTile.transform.localPosition = new Vector3((float)(blockSize.x - 1) / 2, (float)blockSize.y / 2, (float)(blockSize.z - 1) / 2);
+        //Vector3Int buildingSize = new Vector3Int(blockSize.x - 8, blockSize.y, blockSize.z - 8);
+        //GameObject buildingTile = Instantiate(buildingPrefab);
+        //buildingTile.transform.localScale = buildingSize;
+        //buildingTile.transform.SetParent(blockContainer.transform);
+        //buildingTile.transform.localPosition = new Vector3((float)(blockSize.x - 1) / 2, (float)blockSize.y / 2, (float)(blockSize.z - 1) / 2);
+
+        GameObject tempBlock = new GameObject("Block", new System.Type[] { typeof(MeshRenderer), typeof(MeshFilter) });
+        tempBlock.GetComponent<MeshFilter>().mesh = new BlockMeshGenerator().CreateMeshFromData(tempData, this);
+
         return blockContainer;
     }
 
