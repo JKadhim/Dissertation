@@ -120,37 +120,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &256021557
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 256021559}
-  m_Layer: 0
-  m_Name: Generation Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &256021559
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 256021557}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,10 +350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa6bbb6d865cc5740b01e5cc0a0e4804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSizeX: 2
-  gridSizeZ: 3
+  gridSize: {x: 20, y: 20}
+  zoneSize: {x: 3, y: 3}
   player: {fileID: 1820243409}
-  blockPrefab: {fileID: 1303248436634858441, guid: 357a88bed462dc745bb83a91275d06b3, type: 3}
+  zonePrefab: {fileID: 1303248436634858441, guid: 357a88bed462dc745bb83a91275d06b3, type: 3}
 --- !u!1 &1820243409
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,5 +468,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 705507995}
   - {fileID: 1820243413}
-  - {fileID: 256021559}
   - {fileID: 1325322272}

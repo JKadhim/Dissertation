@@ -1,17 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class MeshGenerator : MonoBehaviour
 {
-    public void Generate()
+    public void Generate(Color type)
     {
         Mesh mesh = new Mesh();
         Vector2Int zoneSize = GetComponentInParent<GenerateGrid>().zoneSize;
         MeshFilter filter = GetComponent<MeshFilter>();
-        GetComponent<MeshRenderer>().material.SetColor("_Color", Color.white);
+        GetComponent<MeshRenderer>().material.SetColor("_Color", GetComponent<Zone>().type);
 
         mesh.vertices = CreateVertices(zoneSize);
         mesh.triangles = CreateTriangles(zoneSize);
