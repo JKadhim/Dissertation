@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class GenerateGrid : MonoBehaviour
 {
-    [SerializeField] private int gridSizeX, gridSizeZ;
+    [SerializeField] Vector2Int gridSize = new Vector2Int(4, 4);
+    [SerializeField] public Vector2Int zoneSize = new Vector2Int(30, 20);
     [SerializeField] private GameObject player;
     public Hashtable hashtable;
-    public GameObject blockPrefab;
-
-    private int blockSizeX, blockSizeZ, tileSize;
+    public GameObject zonePrefab;
 
     private void Start()
     {
-        blockSizeX = blockPrefab.GetComponent<Block>().blockSizeX;
-        blockSizeZ = blockPrefab.GetComponent<Block>().blockSizeZ;
-        tileSize = blockPrefab.GetComponent<Block>().tileSize;
         hashtable = new Hashtable();
-        for (int x = -gridSizeX; x < gridSizeX; x++)
+        for (int x = -gridSize.x; x < gridSize.x; x++)
         {
-            for (int z = -gridSizeZ; z < gridSizeZ; z++)
+            for (int z = -gridSize.y; z < gridSize.y; z++)
             {
-                Vector3 pos = new Vector3(x * blockSizeX * tileSize, 0, z * blockSizeZ *tileSize);
+                Vector3 pos = new Vector3(x * zoneSize.x, 0, z * zoneSize.y);
 
                 if (!hashtable.ContainsKey(pos))
                 {
-                    GameObject block = Instantiate(blockPrefab, pos, Quaternion.identity, transform);
+                    GameObject zone = new GameObject("Zone" + pos, typeof(Zone), typeof(MeshGenerator),
+                        typeof(MeshFilter), typeof(MeshRenderer));
+                    
+                    zone.transform.parent = transform;
+                    zone.transform.localPosition = pos;
 
-                    hashtable.Add(pos, block);
+                    hashtable.Add(pos, zone);
                 }
 
             }
